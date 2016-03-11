@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
+const port = process.env.PORT || 3000
 
 //things to do outside of production
 if (!process.env.PORT) app.use(require('morgan')('dev'))
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, './app')))
-app.listen(process.env.PORT || 3000, () => console.log(`listening on port ${port}`))
+app.listen(port, () => console.log(`listening on port ${port}`))
 
 // middleware
 let authorize = (req, res, next) => {
@@ -36,7 +37,7 @@ let authorize = (req, res, next) => {
 let grabMatches = (req, res, next) => {
   console.log('middleware: get Matches and store info')
   client.getHistory((error, data) => {
-    if (error) res.sendStatus(400)
+    if (error) res.sendStatus(400);
     if (data) {
       console.log('successfully retrieved match history')
       let arrayOfMatchObjs = []
