@@ -1,5 +1,8 @@
 # Dependency directory
 node_modules/*
 
+# exclude customized version of tinderjs
+!node_modules/tinderjs
+
 # build
 app/build/
