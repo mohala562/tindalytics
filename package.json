@@ -1,0 +1,47 @@
+{
+  "name": "tindalytics",
+  "version": "1.0.0",
+  "description": "analysis of your tinder account and matches",
+  "main": "server.js",
+  "dependencies": {
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babelify": "^7.2.0",
+    "body-parser": "^1.15.0",
+    "browserify": "^10.2.4",
+    "express": "^4.13.4",
+    "gulp": "^3.9.0",
+    "gulp-notify": "^2.2.0",
+    "horoscope": "^0.3.0",
+    "path": "^0.12.7",
+    "react": "^0.14",
+    "react-dom": "^0.14.0",
+    "sentiment": "^1.0.6",
+    "tinderjs": "^1.0.8",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp-nodemon": "^2.0.6",
+    "morgan": "^1.7.0",
+    "watchify": "^3.2.2"
+  },
+  "scripts": {
+    "prestart": "npm run task",
+    "start": "node server/server.js",
+    "start-dev": "npm run task",
+    "task": "gulp",
+    "uglifyjs": "uglifyjs build/bundle.js >build/bundle.min.js",
+    "cleancss": "cleancss app/css/style.css > app/css/style.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcwelborn/tindalytics.git"
+  },
+  "author": "gcwelborn",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gcwelborn/tindalytics/issues"
+  },
+  "homepage": "https://github.com/gcwelborn/tindalytics#readme"
+}
