@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const bodyParser = require('body-parser')
-let port = process.env.PORT || 3000
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
 
@@ -15,7 +14,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, './app')))
-app.listen(3000, () => console.log(`listening on port ${port}`))
+app.listen(process.env.PORT || 3000, () => console.log(`listening on port ${port}`))
 
 // middleware
 let authorize = (req, res, next) => {
