@@ -27,7 +27,7 @@
     "watchify": "^3.2.2"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server.js",
     "start-dev": "npm run task",
     "task": "gulp",
     "uglifyjs": "uglifyjs build/bundle.js >build/bundle.min.js",
