@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 3000
+let port = process.env.PORT || 3000
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
 
