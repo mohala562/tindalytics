@@ -25,7 +25,7 @@ let App = React.createClass({
             <ProfileAnalysis
               userProfile={this.state.userProfile}
               matchSummary={this.state.matchSummary}
-              matchSummary={this.state.matchSummary} />
+              userMatches={this.state.userMatches} />
           </div>
         )
       }

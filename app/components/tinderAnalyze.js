@@ -6,7 +6,7 @@ const analyzeTinderUserandMatches = (userObj) => {
   let userProfile = userObjConstructor(userObj.userProfile)
   let userMatches = userObj.userMatches.map(match => {
       return matchObjConstructor(match)
-  })
+  }).reverse()
   let matchSummary = summarizeMatches(userMatches)
   return { userProfile, userMatches, matchSummary, analyzed: true}
 }
@@ -76,7 +76,7 @@ let matchObjConstructor = match => {
   let sentimentPercent = sentimentValueTotal / sentimentWordArray.length
   sentimentPercent += 5 //changes range from (-5, 5) to (0, 10)
   sentimentPercent *= 10 //changes range from (0, 10) to (0, 100)
-  returnObj.sentimentPercent = sentimentPercent.toFixed(2)
+  returnObj.sentimentPercent = sentimentPercent.toFixed(0)
     //end of sentimentPercent
   returnObj.numberOfTotalMessages = match.messages.length
   returnObj.messagesSentFromThem = match.messages.reduce((total, currMessage) => {
