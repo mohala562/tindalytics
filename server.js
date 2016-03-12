@@ -5,10 +5,13 @@ const app = express()
 const bodyParser = require('body-parser')
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
+// heroku port or default to 3000
 const port = process.env.PORT || 3000
 
-//things to do outside of production
-if (!process.env.PORT) app.use(require('morgan')('dev'))
+// use morgan for server loggin in development
+if (!process.env.PORT) {
+  app.use(require('morgan')('dev'))
+}
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -17,8 +20,20 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, './app')))
 app.listen(port, () => console.log(`listening on port ${port}`))
 
+
+// compression
+const shouldCompress = (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
+app.use(require('compression')({filter: shouldCompress}));
+
 // middleware
-let authorize = (req, res, next) => {
+const authorize = (req, res, next) => {
   console.time('full analysis')
   console.log('middleware: authorize and store user info')
   let fb_id = req.body.fb_id // 658697848
@@ -34,7 +49,7 @@ let authorize = (req, res, next) => {
   })
 }
 
-let grabMatches = (req, res, next) => {
+const grabMatches = (req, res, next) => {
   console.log('middleware: get Matches and store info')
   client.getHistory((error, data) => {
     if (error) res.sendStatus(400);
@@ -53,7 +68,7 @@ let grabMatches = (req, res, next) => {
   })
 }
 
-let returnData = (req, res) => {
+const returnData = (req, res) => {
   console.log('middleware: send back the data to client')
   res.send(JSON.stringify(
     {

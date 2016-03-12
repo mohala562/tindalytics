@@ -1,5 +1,5 @@
 const React = require('react')
-
+const $ = require('jquery')
 const analyze = require('./tinderAnalyze.js')
 
 let Login = React.createClass({

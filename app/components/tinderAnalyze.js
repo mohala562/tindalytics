@@ -1,5 +1,4 @@
 'use strict'
-const horoscope = require('horoscope')
 const sentiment = require('sentiment')
 const _ = require('underscore')
 
@@ -48,7 +47,7 @@ let matchObjConstructor = match => {
   returnObj.birthDay = new Date(match.person.birth_date)
   let monthOfBirth = parseInt(match.person.birth_date.substring(5, 7))
   let dayOfBirth = parseInt(match.person.birth_date.substring(8, 10))
-  returnObj.astrologicalSign = horoscope.getSign(monthOfBirth, dayOfBirth)
+  returnObj.astrologicalSign = getSign(monthOfBirth, dayOfBirth)
   returnObj.lastActive = new Date(match.person.ping_time)
   returnObj.total_days_on_Tinder = getDifferenceInDaysBetween(
     new Date(match.created_date),
@@ -170,3 +169,25 @@ let getDifferenceInDaysBetween = (date1, date2) => {
   let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
   return diffDays
 }
+
+//getSign function from horoscope library on NPM
+let getSign = (month, day) => {
+		if (typeof month !== 'number' || typeof day !== 'number') throw new Error('HOROSCOPE.JS - getSign: month/day need to be numbers')
+		if (month < 1 || month > 12) throw new Error('HOROSCOPE.JS - getSign: month needs to be between greater than 1, less than 12')
+		if (day < 1 || day > 31) throw new Error('HOROSCOPE.JS - getSign: day cant be zero, negative, or greater than than 31')
+		let monthToSignFunctions = [null,
+	    day => (day <= 19) ? 'Capricorn' : 'Aquarius',
+	    day => (day <= 18) ? 'Aquarius' : 'Pisces',
+	    day => (day <= 20) ? 'Pisces' : 'Aries',
+	    day => (day <= 19) ? 'Aries' : 'Taurus',
+	    day => (day <= 20) ? 'Taurus' : 'Gemini',
+	    day => (day <= 20) ? 'Gemini' : 'Cancer',
+	    day => (day <= 22) ? 'Cancer' : 'Leo',
+	    day => (day <= 22) ? 'Leo' : 'Virgo',
+	    day => (day <= 22) ? 'Virgo' : 'Libra',
+	    day => (day <= 22) ? 'Libra' : 'Scorpio',
+	    day => (day <= 21) ? 'Scorpio' : 'Sagittarius',
+	    day => (day <= 21) ? 'Sagittarius' : 'Capricorn'
+	  ]
+		return monthToSignFunctions[month](day)
+	};
