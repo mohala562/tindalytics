@@ -25,7 +25,7 @@ let Login = React.createClass({
         that.props.newState(analyze(response))
       },
       error: function(error) {
-        alert('Something went wrong., please try again... Error: ', error)
+        alert(error.status + ": " + error.responseText)
         console.log(error);
       }
     })
