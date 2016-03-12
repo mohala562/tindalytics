@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
+const compression = require('compression')
 // heroku port or default to 3000
 const port = process.env.PORT || 3000
 
@@ -30,7 +31,7 @@ const shouldCompress = (req, res) => {
   // fallback to standard filter function
   return compression.filter(req, res)
 }
-app.use(require('compression')({filter: shouldCompress}));
+app.use(compression({filter: shouldCompress}));
 
 // middleware
 const authorize = (req, res, next) => {
