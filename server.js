@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const tinder = require('tinderjs')
 const client = new tinder.TinderClient()
 const compression = require('compression')
-// heroku port or default to 3000
+  // heroku port or default to 3000
 const port = process.env.PORT || 3000
 
 // use morgan for server loggin in development
@@ -31,7 +31,9 @@ const shouldCompress = (req, res) => {
   // fallback to standard filter function
   return compression.filter(req, res)
 }
-app.use(compression({filter: shouldCompress}));
+app.use(compression({
+  filter: shouldCompress
+}));
 
 // middleware
 const authorize = (req, res, next) => {
@@ -42,10 +44,11 @@ const authorize = (req, res, next) => {
     return res.sendStatus(400)
   }
   client.authorize(fb_ut, fb_id, (err, body) => {
-    if (err) return res.sendStatus(400);
-    if (!err) {
+    if (body !== null) {
       req.userProfile = body
       next()
+    } else {
+      return res.sendStatus(400)
     }
   })
 }
@@ -60,10 +63,10 @@ const grabMatches = (req, res, next) => {
       console.log('successfully retrieved match history')
       let arrayOfMatchObjs = []
       data.matches.forEach(function(match) {
-          if (match.person) {
-            arrayOfMatchObjs.push(match)
-          }
-        })
+        if (match.person) {
+          arrayOfMatchObjs.push(match)
+        }
+      })
       req.userMatches = arrayOfMatchObjs
       console.log(arrayOfMatchObjs.length + ' total matches for ' + req.userProfile.user.name)
       next()
@@ -73,12 +76,10 @@ const grabMatches = (req, res, next) => {
 
 const returnData = (req, res) => {
   console.log('middleware: send back the data to client')
-  res.send(JSON.stringify(
-    {
-      userProfile: req.userProfile,
-      userMatches: req.userMatches
-    }
-  ))
+  res.send(JSON.stringify({
+    userProfile: req.userProfile,
+    userMatches: req.userMatches
+  }))
 }
 
 // main route
