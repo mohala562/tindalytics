@@ -47,7 +47,7 @@ let ProfileAnalysis = React.createClass({
 
     return (
     <div>
-        <h2 style={{'textAlign':'center'}}>Welcome, {userProfile.name}</h2>
+        <h2 style={{'textAlign':'center'}}>{userProfile.name}</h2>
           <p style={{'textAlign':'center'}}><i>{userProfile.bio}</i></p>
         <p style={{'textAlign':'center'}}>tinder ID: {userProfile._id}</p>
         <p style={{'textAlign':'center'}}>account created: {new Date(userProfile.acct_created).toLocaleString()} </p>
