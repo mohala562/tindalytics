@@ -62,9 +62,9 @@ let Login = React.createClass({
             </div>
         </div>
         <p style={{'textAlign' : 'center', 'marginTop': "30px"}}>
-            Tindalytics does not store any user data.
+            Tindalytics does not store any of your tinder data.
             <br/>
-            The source code is available on <a href="https://www.github.com/gcwelborn/tindalytics">Github.</a>
+            Source code is available on <a href="https://www.github.com/gcwelborn/tindalytics">Github.</a>
         </p>
       </div>
     )
