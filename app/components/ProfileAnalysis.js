@@ -1,6 +1,8 @@
 'use strict'
 const React = require('react')
 
+const center = {'textAlign':'center'}
+
 let ProfileAnalysis = React.createClass({
   renderMatches: function(userMatches) {
     let rows = userMatches.map((match, i) => {
@@ -47,17 +49,18 @@ let ProfileAnalysis = React.createClass({
 
     return (
     <div>
-        <h2 style={{'textAlign':'center'}}>{userProfile.name}</h2>
-          <p style={{'textAlign':'center'}}><i>{userProfile.bio}</i></p>
-        <p style={{'textAlign':'center'}}>tinder ID: {userProfile._id}</p>
-        <p style={{'textAlign':'center'}}>account created: {new Date(userProfile.acct_created).toLocaleString()} </p>
-        <div style={{'textAlign':'center'}} className="row">{photoDivs}</div>
+        <h2 style={center}>{userProfile.name}</h2>
+          <p style={center}><i>{userProfile.bio}</i></p>
+        <p style={center}>tinder ID: {userProfile._id}</p>
+        <p style={center}>account created: {new Date(userProfile.acct_created).toLocaleString()} </p>
+        <p style={center}>lifetime connections: {userProfile.connection_count}</p>
+        <div style={center} className="row">{photoDivs}</div>
 
 
         <div className="row" style={{'textAlign':'center', 'marginTop': '40px'}} >
           <div className="three columns"><h4>{(matchSummary.total_matches / userProfile.connection_count).toFixed(2) * 100}%</h4><p>match retention</p></div>
-          <div className="three columns"><h4>{matchSummary.total_matches}</h4><p>total matches</p></div>
-          <div className="three columns"><h4>{matchSummary.average_age}</h4><p>average age</p></div>
+          <div className="three columns"><h4>{matchSummary.total_matches}</h4><p>current matches</p></div>
+          <div className="three columns"><h4>{matchSummary.average_age}</h4><p>average age of matches</p></div>
           <div className="three columns"><h4>{matchSummary.average_messages_per_match}</h4><p>average # messages per match </p></div>
         </div>
         <div className="row" style={{'textAlign':'center'}} >
@@ -66,7 +69,7 @@ let ProfileAnalysis = React.createClass({
           <div className="three columns"><h4>{matchSummary.sent_messages}</h4><p>sent messages</p></div>
           <div className="three columns"><h4>{matchSummary.received_messages}</h4><p>received messages</p></div>
         </div>
-        <h3 style={{'textAlign':'center'}}>Your Matches</h3>
+        <h3 style={center}>Your Matches</h3>
         {this.renderMatches(userMatches)}
 
     </div>)
