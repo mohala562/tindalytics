@@ -39,10 +39,10 @@ const authorize = (req, res, next) => {
   let fb_id = req.body.fb_id || null // 658697848
   let fb_ut = req.body.fb_ut || null
   if (fb_ut === null || fb_id === null) {
-    res.sendStatus(400)
+    return res.sendStatus(400)
   }
   client.authorize(fb_ut, fb_id, (err, body) => {
-    if (err) res.sendStatus(400);
+    if (err) return res.sendStatus(400);
     if (!err) {
       req.userProfile = body
       next()
@@ -53,7 +53,9 @@ const authorize = (req, res, next) => {
 const grabMatches = (req, res, next) => {
   console.log('middleware: get Matches and store info')
   client.getHistory((error, data) => {
-    if (error) res.sendStatus(400)
+    if (error) {
+      return res.sendStatus(400)
+    }
     if (data) {
       console.log('successfully retrieved match history')
       let arrayOfMatchObjs = []
@@ -61,7 +63,7 @@ const grabMatches = (req, res, next) => {
           if (match.person) {
             arrayOfMatchObjs.push(match)
           }
-        }) //end of: forEach match function
+        })
       req.userMatches = arrayOfMatchObjs
       console.log(arrayOfMatchObjs.length + ' total matches for ' + req.userProfile.user.name)
       next()
