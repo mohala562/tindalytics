@@ -41,9 +41,10 @@ let Login = React.createClass({
         </div>
         <div className="row">
           <div className="one-half column">
-            <p>You can get your Facebook ID <a href="http://findmyfbid.com/">here</a></p>
-            <p>You can get your Facebook User Token by clicking <a href="https://www.facebook.com/dialog/oauth?client_id=464891386855067&redirect_uri=https://www.facebook.com/connect/login_success.html&scope=basic_info,email,public_profile,user_about_me,user_activities,user_birthday,user_education_history,user_friends,user_interests,user_likes,user_location,user_photos,user_relationship_details&response_type=token">
-              here</a> and quickly copying the URL to your clipboard for extraction. It will be after <i><b>#access_token=</b></i>, but before <i><b>&expires_in=</b>.</i> Be Warned, it disappears quickly though and is recommended you use Google Chrome.</p>
+            <p>You can get your Facebook ID <a target="_blank" href="http://findmyfbid.com/">here</a></p>
+            <p>You can get your Facebook User Token by clicking &nbsp;
+              <a target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=464891386855067&redirect_uri=https://www.facebook.com/connect/login_success.html&scope=basic_info,email,public_profile,user_about_me,user_activities,user_birthday,user_education_history,user_friends,user_interests,user_likes,user_location,user_photos,user_relationship_details&response_type=token">
+               here</a> and quickly copying the URL to your clipboard for extraction. It will be after <i><b>#access_token=</b></i>, but before <i><b>&expires_in=</b>.</i> Be Warned, it disappears quickly though and is recommended you use Google Chrome.</p>
           </div>
           <div className="one-half column">
             <div className="row">
